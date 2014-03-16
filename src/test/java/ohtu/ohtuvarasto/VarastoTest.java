@@ -29,6 +29,24 @@ public class VarastoTest {
     public void uudellaVarastollaOikeaTilavuus() {
         assertEquals(10, varasto.getTilavuus(), vertailuTarkkuus);
     }
+    
+    @Test
+    public void tyhjanLisaaminenEiKasvataSaldoa() {
+        varasto.lisaaVarastoon(0);
+        assertEquals(0, varasto.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void yliPoistaminenEiRikoKaikkea() {
+        varasto.otaVarastosta(5);
+    }
+    
+    @Test
+    public void virheellinenOttoEiTapahdu() {
+        varasto.lisaaVarastoon(5);
+        varasto.otaVarastosta(-5);
+        assertEquals(5, varasto.getSaldo(), vertailuTarkkuus);
+    }
 
     @Test
     public void lisaysLisaaSaldoa() {
